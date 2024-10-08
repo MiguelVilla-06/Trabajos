@@ -1,0 +1,1210 @@
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
+import android.health.connect.datatypes.units.Length;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private ImageView im1,im2,im3,im4,im5,im6,im7,im8;
+    private TextView label;
+    private int r1,r2,r3,r4,r5,r6,r7,r8;
+    private int sel1=0,sel2=0,op1,op2,par=0;
+    private boolean n1,n2,n3,n4,n5,n6;
+    private boolean c1,c2,c3,c4,c5,c6;
+
+    private int[] a = new int[8];
+    private int num,conta=0,tam;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        label= (TextView)findViewById(R.id.si);
+        im1=(ImageView) findViewById(R.id.memo1);
+        im2=(ImageView) findViewById(R.id.memo2);
+        im3=(ImageView) findViewById(R.id.memo3);
+        im4=(ImageView) findViewById(R.id.memo4);
+        im5=(ImageView) findViewById(R.id.memo5);
+        im6=(ImageView) findViewById(R.id.memo6);
+        im7=(ImageView) findViewById(R.id.memo7);
+        im8=(ImageView) findViewById(R.id.memo8);
+        im1.setOnClickListener(this);
+        im2.setOnClickListener(this);
+        im3.setOnClickListener(this);
+        im4.setOnClickListener(this);
+        im5.setOnClickListener(this);
+        im6.setOnClickListener(this);
+        im7.setOnClickListener(this);
+        im8.setOnClickListener(this);
+        im1.setImageResource(R.drawable.rojo);
+        im2.setImageResource(R.drawable.rojo);
+        im3.setImageResource(R.drawable.rojo);
+        im4.setImageResource(R.drawable.rojo);
+        im5.setImageResource(R.drawable.negro);
+        im6.setImageResource(R.drawable.negro);
+        im7.setImageResource(R.drawable.negro);
+        im8.setImageResource(R.drawable.negro);
+        tam=4;
+        n1=false;
+        n2=false;
+        n3=false;
+        n4=false;
+        n5=false;
+        n6=false;
+        c1=false;
+        c2=false;
+        c3=false;
+        c4=false;
+        c5=false;
+        c6=false;
+
+        r1= (int) (Math.random() * 4) + 1;
+        r2= (int) (Math.random() * 4) + 1;
+        r3= (int) (Math.random() * 4) + 1;
+        r4= (int) (Math.random() * 4) + 1;
+
+        do {
+            if(r2==r1){
+                r2= (int) (Math.random() * 4) + 1;;
+            }
+
+            if (r3==r1 || r3==r2){
+                r3=(int) (Math.random() * 4) + 1;
+            }
+
+            if (r4==r1 || r4==r2 || r4==r3){
+                r4=(int) (Math.random() * 4) + 1;
+            }
+
+        }while (r2==r1 || r3==r1 || r3==r2 || r4==r1 || r4==r2 || r4==r3);
+        a[0]=r1;
+        a[1]=r2;
+        a[2]=r3;
+        a[3]=r4;
+
+
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater= getMenuInflater();
+        inflater.inflate(R.menu.menutipos,menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId()==R.id.accion_tipos){
+            mostrarDialogo();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    public void mostrarDialogo(){
+        AlertDialog.Builder ajustes =new AlertDialog.Builder(MainActivity.this);
+        ajustes.setTitle("Elegir tipos");
+        ajustes.setItems(R.array.elegir, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (i==0){
+                    par=0;
+                    tam=4;
+                    r1= (int) (Math.random() * 4) + 1;
+                    r2= (int) (Math.random() * 4) + 1;
+                    r3= (int) (Math.random() * 4) + 1;
+                    r4= (int) (Math.random() * 4) + 1;
+
+                    do {
+                        if(r2==r1){
+                            r2= (int) (Math.random() * 4) + 1;;
+                        }
+
+                        if (r3==r1 || r3==r2){
+                            r3=(int) (Math.random() * 4) + 1;
+                        }
+
+                        if (r4==r1 || r4==r2 || r4==r3){
+                            r4=(int) (Math.random() * 4) + 1;
+                        }
+
+                    }while (r2==r1 || r3==r1 || r3==r2 || r4==r1 || r4==r2 || r4==r3);
+                    a[0]=r1;
+                    a[1]=r2;
+                    a[2]=r3;
+                    a[3]=r4;
+                    im1.setImageResource(R.drawable.rojo);
+                    im2.setImageResource(R.drawable.rojo);
+                    im3.setImageResource(R.drawable.rojo);
+                    im4.setImageResource(R.drawable.rojo);
+                    im5.setImageResource(R.drawable.negro);
+                    im6.setImageResource(R.drawable.negro);
+                    im7.setImageResource(R.drawable.negro);
+                    im8.setImageResource(R.drawable.negro);
+                }
+                else if (i==1){
+                    par=0;
+                    tam=6;
+                    r1= (int) (Math.random() * 6) + 1;
+                    r2= (int) (Math.random() * 6) + 1;
+                    r3= (int) (Math.random() * 6) + 1;
+                    r4= (int) (Math.random() * 6) + 1;
+                    r5= (int) (Math.random() * 6) + 1;
+                    r6= (int) (Math.random() * 6) + 1;
+
+                    do {
+                        if(r2==r1){
+                            r2= (int) (Math.random() * 6) + 1;;
+                        }
+
+                        if (r3==r1 || r3==r2){
+                            r3=(int) (Math.random() * 6) + 1;
+                        }
+
+                        if (r4==r1 || r4==r2 || r4==r3){
+                            r4=(int) (Math.random() * 6) + 1;
+                        }
+
+                        if (r5==r1 || r5==r2 || r5==r3 || r5==r4){
+                            r5=(int) (Math.random() * 6) + 1;
+                        }
+
+                        if (r6==r1 || r6==r2 || r6==r3 || r6==r4 || r6==r5){
+                            r6=(int) (Math.random() * 6) + 1;
+                        }
+
+                    }while (r2==r1 || r3==r1 || r3==r2 || r4==r1 || r4==r2 || r4==r3 || r5==r1 || r5==r2 || r5==r3 || r5==r4 || r6==r1 || r6==r2 || r6==r3 || r6==r4 || r6==r5);
+                    a[0]=r1;
+                    a[1]=r2;
+                    a[2]=r3;
+                    a[3]=r4;
+                    a[4]=r5;
+                    a[5]=r6;
+                    im1.setImageResource(R.drawable.rojo);
+                    im2.setImageResource(R.drawable.rojo);
+                    im3.setImageResource(R.drawable.rojo);
+                    im4.setImageResource(R.drawable.rojo);
+                    im5.setImageResource(R.drawable.rojo);
+                    im6.setImageResource(R.drawable.rojo);
+                    im7.setImageResource(R.drawable.negro);
+                    im8.setImageResource(R.drawable.negro);
+
+                }
+                else if (i==2){
+                    par=0;
+                    tam=8;
+                    r1= (int) (Math.random() * 8) + 1;
+                    r2= (int) (Math.random() * 8) + 1;
+                    r3= (int) (Math.random() * 8) + 1;
+                    r4= (int) (Math.random() * 8) + 1;
+                    r5= (int) (Math.random() * 8) + 1;
+                    r6= (int) (Math.random() * 8) + 1;
+                    r7= (int) (Math.random() * 8) + 1;
+                    r8= (int) (Math.random() * 8) + 1;
+
+                    do {
+                        if(r2==r1){
+                            r2= (int) (Math.random() * 8) + 1;;
+                        }
+
+                        if (r3==r1 || r3==r2){
+                            r3=(int) (Math.random() * 8) + 1;
+                        }
+
+                        if (r4==r1 || r4==r2 || r4==r3){
+                            r4=(int) (Math.random() * 8) + 1;
+                        }
+
+                        if (r5==r1 || r5==r2 || r5==r3 || r5==r4){
+                            r5=(int) (Math.random() * 8) + 1;
+                        }
+
+                        if (r6==r1 || r6==r2 || r6==r3 || r6==r4 || r6==r5){
+                            r6=(int) (Math.random() * 8) + 1;
+                        }
+                        if (r7==r1 || r7==r2 || r7==r3 || r7==r4 || r7==r5 || r7==r6){
+                            r7=(int) (Math.random() * 8) + 1;
+                        }
+                        if (r8==r1 || r8==r2 || r8==r3 || r8==r4 || r8==r5 || r8==r6 || r8==r7){
+                            r8=(int) (Math.random() * 8) + 1;
+                        }
+                    }while (r2==r1 || r3==r1 || r3==r2 || r4==r1 || r4==r2 || r4==r3 || r5==r1 || r5==r2 || r5==r3 || r5==r4 || r6==r1 || r6==r2 || r6==r3 || r6==r4 || r6==r5 ||
+                            r7==r1 || r7==r2 || r7==r3 || r7==r4 || r7==r5 || r7==r6 || r8==r1 || r8==r2 || r8==r3 || r8==r4 || r8==r5 ||  r8==r6 || r8==r7);
+                    a[0]=r1;
+                    a[1]=r2;
+                    a[2]=r3;
+                    a[3]=r4;
+                    a[4]=r5;
+                    a[5]=r6;
+                    a[6]=r7;
+                    a[7]=r8;
+                    im1.setImageResource(R.drawable.rojo);
+                    im2.setImageResource(R.drawable.rojo);
+                    im3.setImageResource(R.drawable.rojo);
+                    im4.setImageResource(R.drawable.rojo);
+                    im5.setImageResource(R.drawable.rojo);
+                    im6.setImageResource(R.drawable.rojo);
+                    im7.setImageResource(R.drawable.rojo);
+                    im8.setImageResource(R.drawable.rojo);
+                }
+                dialogInterface.dismiss();
+            }
+
+        });
+        AlertDialog cuadro = ajustes.create();
+        cuadro.show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (tam==4){
+            if (conta==0){
+                if(view.getId()==R.id.memo1){
+                    op1=1;
+                    n1=true;
+                    if (r1==1 || r1==2){
+                        sel1=1;
+                        im1.setImageResource(R.drawable.ah);
+                    }
+                    if (r1==3 || r1==4){
+                        sel1=2;
+                        im1.setImageResource(R.drawable.dawn);
+                    }
+
+
+
+                    // revisar();
+                    label.setText(a[0]+"");
+
+                }
+                else if(view.getId()==R.id.memo2){
+                    op1=2;
+                    n2=true;
+                    if (r2==1 || r2==2){
+                        sel1=1;
+                        im2.setImageResource(R.drawable.ah);
+                    }
+                    if (r2==3 || r2==4){
+                        sel1=2;
+                        im2.setImageResource(R.drawable.dawn);
+                    }
+
+
+                    // revisar();
+                    label.setText(a[1]+"");
+
+                }
+                else if(view.getId()==R.id.memo3){
+                    op1=3;
+                    n3=true;
+                    if (r3==1 || r3==2){
+                        sel1=1;
+                        im3.setImageResource(R.drawable.ah);
+                    }
+                    if (r3==3 || r3==4){
+                        sel1=2;
+                        im3.setImageResource(R.drawable.dawn);
+                    }
+
+                    // revisar();
+                    label.setText(a[2]+"");
+                }
+                else if(view.getId()==R.id.memo4){
+                    op1=4;
+                    n4=true;
+                    if (r4==1 || r4==2){
+                        sel1=1;
+                        im4.setImageResource(R.drawable.ah);
+                    }
+                    if (r4==3 || r4==4){
+                        sel1=2;
+                        im4.setImageResource(R.drawable.dawn);
+                    }
+
+                    // revisar();
+                    label.setText(a[3]+"");
+                }
+
+                conta++;
+            }
+            else if(conta==1) {
+
+                if(view.getId()==R.id.memo1){
+                    op2=1;
+                    n1=true;
+                    if (r1==1 || r1==2){
+                        sel2=1;
+                        im1.setImageResource(R.drawable.ah);
+                    }
+                    if (r1==3 || r1==4){
+                        sel2=2;
+                        im1.setImageResource(R.drawable.dawn);
+                    }
+
+                    // revisar();
+                    label.setText(a[0]+"");
+
+                }
+                else if(view.getId()==R.id.memo2){
+                    op2=2;
+                    n2=true;
+                    if (r2==1 || r2==2){
+                        sel2=1;
+                        im2.setImageResource(R.drawable.ah);
+                    }
+                    if (r2==3 || r2==4){
+                        sel2=2;
+                        im2.setImageResource(R.drawable.dawn);
+                    }
+
+
+                    // revisar();
+                    label.setText(a[1]+"");
+
+                }
+                else if(view.getId()==R.id.memo3){
+                    op2=3;
+                    n3=true;
+                    if (r3==1 || r3==2){
+                        sel2=1;
+                        im3.setImageResource(R.drawable.ah);
+                    }
+                    if (r3==3 || r3==4){
+                        sel2=2;
+                        im3.setImageResource(R.drawable.dawn);
+                    }
+
+                    //revisar();
+                    label.setText(a[2]+"");
+                }
+                else if(view.getId()==R.id.memo4){
+                    op2=4;
+                    n4=true;
+                    if (r4==1 || r4==2){
+                        sel2=1;
+                        im4.setImageResource(R.drawable.ah);
+                    }
+                    if (r4==3 || r4==4){
+                        sel2=2;
+                        im4.setImageResource(R.drawable.dawn);
+                    }
+
+                    // revisar();
+                    label.setText(a[3]+"");
+                }
+
+                conta++;
+            }
+            revisar();
+        }
+
+
+
+
+
+        if (tam==6){
+            if (conta==0){
+                if(view.getId()==R.id.memo1){
+                    op1=1;
+                    n1=true;
+                    if (r1==1 || r1==2){
+                        sel1=1;
+                        im1.setImageResource(R.drawable.ah);
+                    }
+                    if (r1==3 || r1==4){
+                        sel1=2;
+                        im1.setImageResource(R.drawable.dawn);
+                    }
+                    if (r1==5 || r1==6){
+                        sel1=3;
+                        im1.setImageResource(R.drawable.beauty);
+                    }
+
+
+                    // revisar();
+                    label.setText(a[0]+"");
+
+                }
+                else if(view.getId()==R.id.memo2){
+                    op1=2;
+                    n2=true;
+                    if (r2==1 || r2==2){
+                        sel1=1;
+                        im2.setImageResource(R.drawable.ah);
+                    }
+                    if (r2==3 || r2==4){
+                        sel1=2;
+                        im2.setImageResource(R.drawable.dawn);
+                    }
+                    if (r2==5 || r2==6){
+                        sel1=3;
+                        im2.setImageResource(R.drawable.beauty);
+                    }
+
+                    // revisar();
+                    label.setText(a[1]+"");
+
+                }
+                else if(view.getId()==R.id.memo3){
+                    op1=3;
+                    n3=true;
+                    if (r3==1 || r3==2){
+                        sel1=1;
+                        im3.setImageResource(R.drawable.ah);
+                    }
+                    if (r3==3 || r3==4){
+                        sel1=2;
+                        im3.setImageResource(R.drawable.dawn);
+                    }
+                    if (r3==5 || r3==6){
+                        sel1=3;
+                        im3.setImageResource(R.drawable.beauty);
+                    }
+                    // revisar();
+                    label.setText(a[2]+"");
+                }
+                else if(view.getId()==R.id.memo4){
+                    op1=4;
+                    n4=true;
+                    if (r4==1 || r4==2){
+                        sel1=1;
+                        im4.setImageResource(R.drawable.ah);
+                    }
+                    if (r4==3 || r4==4){
+                        sel1=2;
+                        im4.setImageResource(R.drawable.dawn);
+                    }
+                    if (r4==5 || r4==6){
+                        sel1=3;
+                        im4.setImageResource(R.drawable.beauty);
+                    }
+                    // revisar();
+                    label.setText(a[3]+"");
+                }
+                else if(view.getId()==R.id.memo5){
+                    op1=5;
+                    n5=true;
+                    if (r5==1 || r5==2){
+                        sel1=1;
+                        im5.setImageResource(R.drawable.ah);
+                    }
+                    if (r5==3 || r5==4){
+                        sel1=2;
+                        im5.setImageResource(R.drawable.dawn);
+                    }
+                    if (r5==5 || r5==6){
+                        sel1=3;
+                        im5.setImageResource(R.drawable.beauty);
+                    }
+                    // revisar();
+                    label.setText(a[4]+"");
+                }
+                else if(view.getId()==R.id.memo6){
+                    op1=6;
+                    n6=true;
+                    if (r6==1 || r6==2){
+                        sel1=1;
+                        im6.setImageResource(R.drawable.ah);
+                    }
+                    if (r6==3 || r6==4){
+                        sel1=2;
+                        im6.setImageResource(R.drawable.dawn);
+                    }
+                    if (r6==5 || r6==6){
+                        sel1=3;
+                        im6.setImageResource(R.drawable.beauty);
+                    }
+                    // revisar();
+                    label.setText(a[5]+"");
+                }
+                conta++;
+            }
+            else if(conta==1) {
+
+                if(view.getId()==R.id.memo1){
+                    op2=1;
+                    n1=true;
+                    if (r1==1 || r1==2){
+                        sel2=1;
+                        im1.setImageResource(R.drawable.ah);
+                    }
+                    if (r1==3 || r1==4){
+                        sel2=2;
+                        im1.setImageResource(R.drawable.dawn);
+                    }
+                    if (r1==5 || r1==6){
+                        sel2=3;
+                        im1.setImageResource(R.drawable.beauty);
+                    }
+
+
+                    // revisar();
+                    label.setText(a[0]+"");
+
+                }
+                else if(view.getId()==R.id.memo2){
+                    op2=2;
+                    n2=true;
+                    if (r2==1 || r2==2){
+                        sel2=1;
+                        im2.setImageResource(R.drawable.ah);
+                    }
+                    if (r2==3 || r2==4){
+                        sel2=2;
+                        im2.setImageResource(R.drawable.dawn);
+                    }
+                    if (r2==5 || r2==6){
+                        sel2=3;
+                        im2.setImageResource(R.drawable.beauty);
+                    }
+
+                    // revisar();
+                    label.setText(a[1]+"");
+
+                }
+                else if(view.getId()==R.id.memo3){
+                    op2=3;
+                    n3=true;
+                    if (r3==1 || r3==2){
+                        sel2=1;
+                        im3.setImageResource(R.drawable.ah);
+                    }
+                    if (r3==3 || r3==4){
+                        sel2=2;
+                        im3.setImageResource(R.drawable.dawn);
+                    }
+                    if (r3==5 || r3==6){
+                        sel2=3;
+                        im3.setImageResource(R.drawable.beauty);
+                    }
+                    //revisar();
+                    label.setText(a[2]+"");
+                }
+                else if(view.getId()==R.id.memo4){
+                    op2=4;
+                    n4=true;
+                    if (r4==1 || r4==2){
+                        sel2=1;
+                        im4.setImageResource(R.drawable.ah);
+                    }
+                    if (r4==3 || r4==4){
+                        sel2=2;
+                        im4.setImageResource(R.drawable.dawn);
+                    }
+                    if (r4==5 || r4==6){
+                        sel2=3;
+                        im4.setImageResource(R.drawable.beauty);
+                    }
+                    // revisar();
+                    label.setText(a[3]+"");
+                }
+                else if(view.getId()==R.id.memo5){
+                    op2=5;
+                    n5=true;
+                    if (r5==1 || r5==2){
+                        sel2=1;
+                        im5.setImageResource(R.drawable.ah);
+                    }
+                    if (r5==3 || r5==4){
+                        sel2=2;
+                        im5.setImageResource(R.drawable.dawn);
+                    }
+                    if (r5==5 || r5==6){
+                        sel2=3;
+                        im5.setImageResource(R.drawable.beauty);
+                    }
+                    // revisar();
+                    label.setText(a[4]+"");
+                }
+                else if(view.getId()==R.id.memo6){
+                    op2=6;
+                    n6=true;
+                    if (r6==1 || r6==2){
+                        sel2=1;
+                        im6.setImageResource(R.drawable.ah);
+                    }
+                    if (r6==3 || r6==4){
+                        sel2=2;
+                        im6.setImageResource(R.drawable.dawn);
+                    }
+                    if (r6==5 || r6==6){
+                        sel2=3;
+                        im6.setImageResource(R.drawable.beauty);
+                    }
+                    // revisar();
+                    label.setText(a[5]+"");
+                }
+
+
+                conta++;
+            }
+            revisar();
+        }
+
+
+
+        if (tam==8){
+            if (conta==0){
+                if(view.getId()==R.id.memo1){
+                    op1=1;
+                    n1=true;
+                    if (r1==1 || r1==2){
+                        sel1=1;
+                        im1.setImageResource(R.drawable.ah);
+                    }
+                    if (r1==3 || r1==4){
+                        sel1=2;
+                        im1.setImageResource(R.drawable.dawn);
+                    }
+                    if (r1==5 || r1==6){
+                        sel1=3;
+                        im1.setImageResource(R.drawable.beauty);
+                    }
+                    if (r1==7 || r1==8){
+                        sel1=4;
+                        im1.setImageResource(R.drawable.star);
+                    }
+
+
+
+                    // revisar();
+                    label.setText(a[0]+"");
+
+                }
+                else if(view.getId()==R.id.memo2){
+                    op1=2;
+                    n2=true;
+                    if (r2==1 || r2==2){
+                        sel1=1;
+                        im2.setImageResource(R.drawable.ah);
+                    }
+                    if (r2==3 || r2==4){
+                        sel1=2;
+                        im2.setImageResource(R.drawable.dawn);
+                    }
+                    if (r2==5 || r2==6){
+                        sel1=3;
+                        im2.setImageResource(R.drawable.beauty);
+                    }if (r2==7 || r2==8){
+                        sel1=4;
+                        im2.setImageResource(R.drawable.star);
+                    }
+
+                    // revisar();
+                    label.setText(a[1]+"");
+
+                }
+                else if(view.getId()==R.id.memo3){
+                    op1=3;
+                    n3=true;
+                    if (r3==1 || r3==2){
+                        sel1=1;
+                        im3.setImageResource(R.drawable.ah);
+                    }
+                    if (r3==3 || r3==4){
+                        sel1=2;
+                        im3.setImageResource(R.drawable.dawn);
+                    }
+                    if (r3==5 || r3==6){
+                        sel1=3;
+                        im3.setImageResource(R.drawable.beauty);
+                    }if (r3==7 || r3==8){
+                        sel1=4;
+                        im3.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[2]+"");
+                }
+                else if(view.getId()==R.id.memo4){
+                    op1=4;
+                    n4=true;
+                    if (r4==1 || r4==2){
+                        sel1=1;
+                        im4.setImageResource(R.drawable.ah);
+                    }
+                    if (r4==3 || r4==4){
+                        sel1=2;
+                        im4.setImageResource(R.drawable.dawn);
+                    }
+                    if (r4==5 || r4==6){
+                        sel1=3;
+                        im4.setImageResource(R.drawable.beauty);
+                    }if (r4==7 || r4==8){
+                        sel1=4;
+                        im4.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[3]+"");
+                }
+                else if(view.getId()==R.id.memo5){
+                    op1=5;
+                    n5=true;
+                    if (r5==1 || r5==2){
+                        sel1=1;
+                        im5.setImageResource(R.drawable.ah);
+                    }
+                    if (r5==3 || r5==4){
+                        sel1=2;
+                        im5.setImageResource(R.drawable.dawn);
+                    }
+                    if (r5==5 || r5==6){
+                        sel1=3;
+                        im5.setImageResource(R.drawable.beauty);
+                    }if (r5==7 || r5==8){
+                        sel1=4;
+                        im5.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[4]+"");
+                }
+                else if(view.getId()==R.id.memo6){
+                    op1=6;
+                    n6=true;
+                    if (r6==1 || r6==2){
+                        sel1=1;
+                        im6.setImageResource(R.drawable.ah);
+                    }
+                    if (r6==3 || r6==4){
+                        sel1=2;
+                        im6.setImageResource(R.drawable.dawn);
+                    }
+                    if (r6==5 || r6==6){
+                        sel1=3;
+                        im6.setImageResource(R.drawable.beauty);
+                    }if (r6==7 || r6==8){
+                        sel1=4;
+                        im6.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[5]+"");
+                }
+                else if(view.getId()==R.id.memo7){
+                    op1=7;
+
+                    if (r7==1 || r7==2){
+                        sel1=1;
+                        im7.setImageResource(R.drawable.ah);
+                    }
+                    if (r7==3 || r7==4){
+                        sel1=2;
+                        im7.setImageResource(R.drawable.dawn);
+                    }
+                    if (r7==5 || r7==6){
+                        sel1=3;
+                        im7.setImageResource(R.drawable.beauty);
+                    }if (r7==7 || r7==8){
+                        sel1=4;
+                        im7.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[6]+"");
+                }
+                else if(view.getId()==R.id.memo8){
+                    op1=8;
+
+                    if (r8==1 || r8==2){
+                        sel1=1;
+                        im8.setImageResource(R.drawable.ah);
+                    }
+                    if (r8==3 || r8==4){
+                        sel1=2;
+                        im8.setImageResource(R.drawable.dawn);
+                    }
+                    if (r8==5 || r8==6){
+                        sel1=3;
+                        im8.setImageResource(R.drawable.beauty);
+                    }if (r8==7 || r8==8){
+                        sel1=4;
+                        im8.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[7]+"");
+                }
+
+                conta++;
+            }
+            else if(conta==1) {
+
+                if(view.getId()==R.id.memo1){
+                    op2=1;
+                    n1=true;
+                    if (r1==1 || r1==2){
+                        sel2=1;
+                        im1.setImageResource(R.drawable.ah);
+                    }
+                    if (r1==3 || r1==4){
+                        sel2=2;
+                        im1.setImageResource(R.drawable.dawn);
+                    }
+                    if (r1==5 || r1==6){
+                        sel2=3;
+                        im1.setImageResource(R.drawable.beauty);
+                    }
+                    if (r1==7 || r1==8){
+                        sel2=4;
+                        im1.setImageResource(R.drawable.star);
+                    }
+
+                    // revisar();
+                    label.setText(a[0]+"");
+
+                }
+                else if(view.getId()==R.id.memo2){
+                    op2=2;
+                    n2=true;
+                    if (r2==1 || r2==2){
+                        sel2=1;
+                        im2.setImageResource(R.drawable.ah);
+                    }
+                    if (r2==3 || r2==4){
+                        sel2=2;
+                        im2.setImageResource(R.drawable.dawn);
+                    }
+                    if (r2==5 || r2==6){
+                        sel2=3;
+                        im2.setImageResource(R.drawable.beauty);
+                    }if (r2==7 || r2==8){
+                        sel2=4;
+                        im2.setImageResource(R.drawable.star);
+                    }
+
+                    // revisar();
+                    label.setText(a[1]+"");
+
+                }
+                else if(view.getId()==R.id.memo3){
+                    op2=3;
+                    n3=true;
+                    if (r3==1 || r3==2){
+                        sel2=1;
+                        im3.setImageResource(R.drawable.ah);
+                    }
+                    if (r3==3 || r3==4){
+                        sel2=2;
+                        im3.setImageResource(R.drawable.dawn);
+                    }
+                    if (r3==5 || r3==6){
+                        sel2=3;
+                        im3.setImageResource(R.drawable.beauty);
+                    }if (r3==7 || r3==8){
+                        sel2=4;
+                        im3.setImageResource(R.drawable.star);
+                    }
+                    //revisar();
+                    label.setText(a[2]+"");
+                }
+                else if(view.getId()==R.id.memo4){
+                    op2=4;
+                    n4=true;
+                    if (r4==1 || r4==2){
+                        sel2=1;
+                        im4.setImageResource(R.drawable.ah);
+                    }
+                    if (r4==3 || r4==4){
+                        sel2=2;
+                        im4.setImageResource(R.drawable.dawn);
+                    }
+                    if (r4==5 || r4==6){
+                        sel2=3;
+                        im4.setImageResource(R.drawable.beauty);
+                    }if (r4==7 || r4==8){
+                        sel2=4;
+                        im4.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[3]+"");
+                }
+                else if(view.getId()==R.id.memo5){
+                    op2=5;
+                    n5=true;
+                    if (r5==1 || r5==2){
+                        sel2=1;
+                        im5.setImageResource(R.drawable.ah);
+                    }
+                    if (r5==3 || r5==4){
+                        sel2=2;
+                        im5.setImageResource(R.drawable.dawn);
+                    }
+                    if (r5==5 || r5==6){
+                        sel2=3;
+                        im5.setImageResource(R.drawable.beauty);
+                    }if (r5==7 || r5==8){
+                        sel2=4;
+                        im5.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[4]+"");
+                }
+                else if(view.getId()==R.id.memo6){
+                    op2=6;
+                    n6=true;
+                    if (r6==1 || r6==2){
+                        sel2=1;
+                        im6.setImageResource(R.drawable.ah);
+                    }
+                    if (r6==3 || r6==4){
+                        sel2=2;
+                        im6.setImageResource(R.drawable.dawn);
+                    }
+                    if (r6==5 || r6==6){
+                        sel2=3;
+                        im6.setImageResource(R.drawable.beauty);
+                    }if (r6==7 || r6==8){
+                        sel2=4;
+                        im6.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[5]+"");
+                }
+                else if(view.getId()==R.id.memo7){
+                    op2=7;
+                    n6=true;
+                    if (r7==1 || r7==2){
+                        sel2=1;
+                        im7.setImageResource(R.drawable.ah);
+                    }
+                    if (r7==3 || r7==4){
+                        sel2=2;
+                        im7.setImageResource(R.drawable.dawn);
+                    }
+                    if (r7==5 || r7==6){
+                        sel2=3;
+                        im7.setImageResource(R.drawable.beauty);
+                    }if (r7==7 || r7==8){
+                        sel2=4;
+                        im7.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[6]+"");
+                }
+                else if(view.getId()==R.id.memo8){
+                    op2=8;
+
+                    if (r8==1 || r8==2){
+                        sel2=1;
+                        im8.setImageResource(R.drawable.ah);
+                    }
+                    if (r8==3 || r8==4){
+                        sel2=2;
+                        im8.setImageResource(R.drawable.dawn);
+                    }
+                    if (r8==5 || r8==6){
+                        sel2=3;
+                        im8.setImageResource(R.drawable.beauty);
+                    }if (r8==7 || r8==8){
+                        sel2=4;
+                        im8.setImageResource(R.drawable.star);
+                    }
+                    // revisar();
+                    label.setText(a[7]+"");
+                }
+
+
+                conta++;
+            }
+            revisar();
+        }
+
+
+    }
+
+    public void revisar(){
+
+        if (conta==2){
+            if (sel1==sel2){
+                Toast.makeText(this, "PAREJA ENCONTRADA :)", Toast.LENGTH_SHORT).show();
+                par++;
+                conta=0;
+            }else {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (tam == 4) {
+                            switch (op1) {
+                                case 1:
+                                    im1.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 2:
+                                    im2.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 3:
+                                    im3.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 4:
+                                    im4.setImageResource(R.drawable.rojo);
+                                    break;
+
+                            }
+                            switch (op2) {
+                                case 1:
+                                    im1.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 2:
+                                    im2.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 3:
+                                    im3.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 4:
+                                    im4.setImageResource(R.drawable.rojo);
+                                    break;
+
+                            }
+
+                            conta = 0;
+                        }
+
+
+
+                        if (tam == 6) {
+                            switch (op1) {
+                                case 1:
+                                    im1.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 2:
+                                    im2.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 3:
+                                    im3.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 4:
+                                    im4.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 5:
+                                    im5.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 6:
+                                    im6.setImageResource(R.drawable.rojo);
+                                    break;
+                            }
+                            switch (op2) {
+                                case 1:
+                                    im1.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 2:
+                                    im2.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 3:
+                                    im3.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 4:
+                                    im4.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 5:
+                                    im5.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 6:
+                                    im6.setImageResource(R.drawable.rojo);
+                                    break;
+                            }
+
+                            conta = 0;
+                        }
+
+
+
+
+
+
+                        if (tam == 8) {
+                            switch (op1) {
+                                case 1:
+                                    im1.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 2:
+                                    im2.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 3:
+                                    im3.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 4:
+                                    im4.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 5:
+                                    im5.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 6:
+                                    im6.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 7:
+                                    im7.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 8:
+                                    im8.setImageResource(R.drawable.rojo);
+                                    break;
+                            }
+                            switch (op2) {
+                                case 1:
+                                    im1.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 2:
+                                    im2.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 3:
+                                    im3.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 4:
+                                    im4.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 5:
+                                    im5.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 6:
+                                    im6.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 7:
+                                    im7.setImageResource(R.drawable.rojo);
+                                    break;
+                                case 8:
+                                    im8.setImageResource(R.drawable.rojo);
+                                    break;
+                            }
+
+                            conta = 0;
+                        }
+                    }
+                }, 1000);
+
+            }
+
+
+
+
+            if (tam ==4){
+                if (par==2){
+                    label.setText("JUEGO TERMINADO");
+                }
+            }
+            if (tam ==6){
+                if (par==3){
+                    label.setText("JUEGO TERMINADO");
+                }
+            }
+            if (tam ==8){
+                if (par==4){
+                    label.setText("JUEGO TERMINADO");
+                }
+            }
+
+
+
+
+
+
+        }
+
+    }
+}

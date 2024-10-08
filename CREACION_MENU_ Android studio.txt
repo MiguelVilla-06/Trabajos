@@ -1,0 +1,28 @@
+MENU.XML 
+<item
+        android:id="@+id/accion_tipos"
+        android:title="tipos"
+
+        />
+
+
+
+
+
+
+
+MAIN_ACTIVITY.JAVA
+public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater= getMenuInflater();
+        inflater.inflate(R.menu.menutipos,menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId()==R.id.accion_tipos){
+            mostrarDialogo();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
