@@ -1,0 +1,118 @@
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Switch;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    private Button boton;
+    private TextView label;
+    private EditText texto;
+
+    private  String s, resultado="";
+    private Switch s1,s2,s3;
+    private String[] cad;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        boton=(Button)findViewById(R.id.boton1);
+        label=(TextView) findViewById(R.id.text1);
+        texto=(EditText) findViewById(R.id.editTextText2);
+        s1=(Switch) findViewById(R.id.espacios);
+        s2=(Switch) findViewById(R.id.mayusculas);
+        s3=(Switch) findViewById(R.id.vocales);
+
+        boton.setOnClickListener(this);
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        double suma=0;
+        if(v.getId()==R.id.boton1){
+        s=texto.getText().toString();
+        cad=s.split("");
+ if (s1.isChecked() && s2.isChecked()==false && s3.isChecked()==false){
+     for (int i=0; i<cad.length;i++){
+          if(cad[i].equals(" ")){
+              cad[i]="";
+          }
+          resultado=resultado+cad[i];
+     }
+ } else if (s2.isChecked() && s1.isChecked()==false && s3.isChecked()==false) {
+     for (int i=0; i<cad.length;i++){
+
+         resultado=resultado+cad[i].toUpperCase();
+     }
+ }else if (s3.isChecked() && s1.isChecked()==false && s2.isChecked()==false) {
+     for (int i=0; i<cad.length;i++){
+if(cad[i].equalsIgnoreCase("a")||cad[i].equalsIgnoreCase("e")||cad[i].equalsIgnoreCase("i")||cad[i].equalsIgnoreCase("o")||cad[i].equalsIgnoreCase("u")){
+    cad[i]="*";
+}
+         resultado=resultado+cad[i];
+     }
+ }
+
+
+ else if (s1.isChecked() && s2.isChecked() && s3.isChecked()==false) {
+     for (int i=0; i<cad.length;i++){
+         if(cad[i].equals(" ")){
+             cad[i]="";
+         }
+         resultado=resultado+cad[i].toUpperCase();
+     }
+ }
+
+
+ else if (s1.isChecked() && s3.isChecked() && s2.isChecked()==false) {
+     for (int i=0; i<cad.length;i++){
+         if(cad[i].equals(" ")){
+             cad[i]="";
+         }
+         if(cad[i].equalsIgnoreCase("a")||cad[i].equalsIgnoreCase("e")||cad[i].equalsIgnoreCase("i")||cad[i].equalsIgnoreCase("o")||cad[i].equalsIgnoreCase("u")){
+             cad[i]="*";
+         }
+         resultado=resultado+cad[i];
+     }
+ }
+
+
+ else if (s2.isChecked() && s3.isChecked() && s1.isChecked()==false) {
+     for (int i=0; i<cad.length;i++){
+         if(cad[i].equalsIgnoreCase("a")||cad[i].equalsIgnoreCase("e")||cad[i].equalsIgnoreCase("i")||cad[i].equalsIgnoreCase("o")||cad[i].equalsIgnoreCase("u")){
+             cad[i]="*";
+         }
+         resultado=resultado+cad[i].toUpperCase();
+     }
+ }
+
+ else if (s1.isChecked() && s2.isChecked() && s3.isChecked()) {
+     for (int i=0; i<cad.length;i++){
+         if(cad[i].equals(" ")){
+             cad[i]="";
+         }
+         if(cad[i].equalsIgnoreCase("a")||cad[i].equalsIgnoreCase("e")||cad[i].equalsIgnoreCase("i")||cad[i].equalsIgnoreCase("o")||cad[i].equalsIgnoreCase("u")){
+             cad[i]="*";
+         }
+         resultado=resultado+cad[i].toUpperCase();
+     }
+ }
+
+
+label.setText(resultado);
+            resultado="";
+
+        }
+    }
+}

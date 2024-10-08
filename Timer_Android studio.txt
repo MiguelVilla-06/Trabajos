@@ -1,0 +1,23 @@
+ private Timer tiempo;
+private int contador;
+ tiempo = new Timer();
+
+            tiempo.scheduleAtFixedRate(new TimerTask() {
+                                           @Override
+                                           public void run() {
+                                               try {
+                                                   contador = contador + 1;
+                                                   if (contador == 100) {
+                                                       contador = 0;
+                                                       contador2++;
+                                                       fotos();
+
+                                                   }
+                                               } catch (Exception e) {
+                                                   e.printStackTrace();
+                                               }
+
+                                           }
+                                       }
+
+                    , 100, 100);

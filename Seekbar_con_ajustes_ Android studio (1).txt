@@ -1,0 +1,137 @@
+package com.example.android_1;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.service.autofill.FillEventHistory;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.SeekBar;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.view.Menu;
+
+public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener{
+private Button boton;
+private TextView label;
+private EditText texto;
+private SeekBar s1,s2;
+private int letras,inicio,fin;
+private  String s, resultado="";
+private char[] cad;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+       //boton=(Button)findViewById(R.id.button);
+        label=(TextView) findViewById(R.id.textView);
+        texto=(EditText) findViewById(R.id.editTextText2);
+        s1=(SeekBar) findViewById(R.id.seek1);
+        s2=(SeekBar) findViewById(R.id.seek2);
+        s1.setOnSeekBarChangeListener(this);
+        s2.setOnSeekBarChangeListener(this);
+    }
+
+public boolean onCreateOptionsMenu(Menu menu){
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.mimenu,menu);
+    return true;
+}
+public boolean onOptionsItemSelected(MenuItem item){
+
+                if(item.getItemId()==R.id.limpiar){
+                    mostrarDialogo();
+                    return true;
+                }
+    if(item.getItemId()==R.id.derechos){
+        mostrarDerechos();
+        return true;
+    }
+                else {
+
+                    return super.onOptionsItemSelected(item);
+
+        }
+}
+public void mostrarDialogo(){
+    AlertDialog dialogoajustes = new AlertDialog.Builder(MainActivity.this).create();
+    dialogoajustes.setTitle("Ajustes de aplicacion");
+    dialogoajustes.setMessage("Limpiar valores");
+
+    dialogoajustes.setButton(AlertDialog.BUTTON_NEUTRAL,"OK",new DialogInterface.OnClickListener(){
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            s1.setProgress(0);
+            s2.setProgress(0);
+            texto.setText("");
+            label.setText("");
+            dialogInterface.dismiss();
+        }
+
+    });
+    dialogoajustes.show();
+
+}
+
+
+    public void mostrarDerechos(){
+        AlertDialog dialogoajustes = new AlertDialog.Builder(MainActivity.this).create();
+        dialogoajustes.setTitle("Derechos");
+        dialogoajustes.setMessage("Ver derechos");
+
+        dialogoajustes.setButton(AlertDialog.BUTTON_NEUTRAL,"OK",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+               label.setText("Creado por: Vill INC. ");
+                dialogInterface.dismiss();
+            }
+
+        });
+        dialogoajustes.show();
+
+    }
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+           s=texto.getText().toString();
+           cad=s.toCharArray();
+           letras=cad.length;
+
+
+        s1.setMax(letras);
+        s2.setMax(letras);
+       if (seekBar.getId()==R.id.seek1){
+    inicio=i;
+}else if (seekBar.getId()==R.id.seek2){
+    fin=i;
+}
+            for( i=0; i<cad.length;i++){
+                if(i>=inicio && i<=fin){
+                resultado=resultado+ cad[i];
+            }}
+
+
+       label.setText(resultado);
+            resultado="";
+
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+}
